@@ -36,7 +36,8 @@ defmodule Poison.Mixfile do
      {:jiffy, github: "davisp/jiffy", only: :bench},
      {:exjsx, github: "talentdeficit/exjsx", only: :bench},
      {:json, github: "cblage/elixir-json", only: :bench},
-     {:jazz, github: "meh/jazz", only: :bench}]
+     {:jazz, github: "meh/jazz", only: :bench},
+     {:uuid, "~> 1.1"}]
   end
 
   defp package do

@@ -92,6 +92,10 @@ defimpl Poison.Encoder, for: BitString do
     end
   end
 
+  defp escape(bytes = <<_::size(48), version::integer-size(4), _::size(12), 1::size(1), 0::size(1), _::size(62)>>, _) when version in [1, 3, 4, 5] do
+    UUID.binary_to_string!(bytes)
+  end
+
   # http://en.wikipedia.org/wiki/Unicode_control_characters
   defp escape(<<char>> <> rest, mode) when char <= 0x1F or char == 0x7F do
     [seq(char) | escape(rest, mode)]

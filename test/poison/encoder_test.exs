@@ -32,6 +32,14 @@ defmodule Poison.EncoderTest do
     assert to_json("\u2028\u2029", escape: :javascript) == ~s("\\u2028\\u2029")
     assert to_json("</script>", escape: :html_safe) == ~s("<\\/script>")
     assert to_json("áéíóúàèìòùâêîôûãẽĩõũ") == ~s("áéíóúàèìòùâêîôûãẽĩõũ")
+    #v1 UUID - Generated from UUID.uuid1
+    assert to_json(<<131, 188, 165, 116, 140, 234, 17, 230, 166, 199, 149, 98, 174, 136, 70, 38>>) == ~s("83bca574-8cea-11e6-a6c7-9562ae884626")
+    #v3 UUID - Generated from UUID.uuid3(:dns, "my.domain.com")
+    assert to_json(<<238, 207, 76, 43, 246, 229, 58, 227, 190, 247, 30, 160, 159, 145, 211, 231>>) == ~s("eecf4c2b-f6e5-3ae3-bef7-1ea09f91d3e7")
+    #v4 UUID - Generated from UUID.uuid4
+    assert to_json(<<81, 162, 167, 201, 69, 83, 69, 176, 172, 116, 142, 55, 66, 110, 237, 104>>) == ~s("51a2a7c9-4553-45b0-ac74-8e37426eed68")
+    #v5 UUID - Generated from UUID.uuid5(:dns, "my.domain.com")
+    assert to_json(<<174, 17, 148, 25, 119, 118, 86, 61, 182, 232, 138, 23, 122, 188, 204, 122>>) == ~s("ae119419-7776-563d-b6e8-8a177abccc7a")
   end
 
   test "Map" do
